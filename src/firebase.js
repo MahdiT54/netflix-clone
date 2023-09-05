@@ -9,7 +9,7 @@ const firebaseConfig = {
   projectId: "netflix-clone-ee113",
   storageBucket: "netflix-clone-ee113.appspot.com",
   messagingSenderId: "1024421897798",
-  appId: "1:1024421897798:web:24bafe47c9836e22738c47",
+  appId: "1:1024421897798:web:24bafe47c9836e22738c47"
 };
 
 // Initialize Firebase app
@@ -19,3 +19,4 @@ const auth = getAuth();
 
 export { auth, createUserWithEmailAndPassword };
 export default db;
+
