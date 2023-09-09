@@ -101,7 +101,7 @@ const PlansScreen = () => {
             <h5>{product.data.name}</h5>
             <h6>{product.data.description}</h6>
           </div>
-          <button onClick={() => loadCheckout(product.data.priceId)}>
+          <button onClick={() => loadCheckout(product.prices[0].priceId)}>
             Subscribe
           </button>
         </div>
