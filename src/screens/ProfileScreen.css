@@ -1,5 +1,5 @@
 .profileScreen {
-  height: 100vh;
+  min-height: 100vh;
   color: white;
 }
 
@@ -15,6 +15,7 @@
 
 .profileScreen__info {
   display: flex;
+  margin-bottom: 24px;
 }
 
 .profileScreen__details {
@@ -50,7 +51,7 @@
 }
 
 .profileScreen__plans {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .profileScreen__plans > h3 {
