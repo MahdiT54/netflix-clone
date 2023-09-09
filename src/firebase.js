@@ -18,5 +18,4 @@ const db = getFirestore();
 const auth = getAuth();
 
 export { db, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword };
-// export default db;
 

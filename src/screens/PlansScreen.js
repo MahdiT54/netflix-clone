@@ -7,6 +7,8 @@ import {
   getDocs,
   getDoc,
   doc,
+  addDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebase"; // Assuming you have a separate firebase.js file for Firebase initialization
 import { useSelector } from "react-redux";
@@ -58,17 +60,21 @@ const PlansScreen = () => {
   console.log(products);
 
   const loadCheckout = async (priceId) => {
-    const docRef = await db
-      .collection("customers")
-      .doc(user.uid)
-      .collection("checkout_sessions")
-      .add({
-        price: priceId,
-        success_url: window.location.origin,
-        cancelUrl: window.location.origin,
-      });
+  if (!priceId) {
+    console.error("priceId is undefined or null");
+    return;
+  }
 
-    docRef.onSnapshot(async (snap) => {
+  const checkoutSessionsRef = collection(db, "customers", user.uid, "checkout_sessions");
+
+  try {
+    const docRef = await addDoc(checkoutSessionsRef, {
+      price: priceId,
+      success_url: window.location.origin,
+      cancelUrl: window.location.origin,
+    });
+
+    onSnapshot(docRef, async (snap) => {
       const { error, sessionId } = snap.data();
 
       if (error) {
@@ -81,7 +87,11 @@ const PlansScreen = () => {
         stripe.redirectToCheckout({ sessionId });
       }
     });
-  };
+  } catch (error) {
+    console.error("Error adding checkout session:", error);
+  }
+};
+
 
   return (
     <div className="plansScreen">
